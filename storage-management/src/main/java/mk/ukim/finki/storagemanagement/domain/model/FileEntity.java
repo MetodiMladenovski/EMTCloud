@@ -6,12 +6,13 @@ import mk.ukim.finki.sharedkernel.domain.sizes.ObjectSize;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "files_metadata")
+@Table(name = "files")
 @Getter
-public class FileMetadataEntity extends AbstractEntity<FileMetadataId> {
+public class FileEntity extends AbstractEntity<FileId> {
 
     private String name;
 
@@ -21,6 +22,16 @@ public class FileMetadataEntity extends AbstractEntity<FileMetadataId> {
     private ObjectSize size;
 
     //mongoDB ID
-    private String contentId;
+    @Lob
+    private byte[] data;
 
+    public FileEntity() {
+    }
+
+    public FileEntity(String name, String type, ObjectSize size, byte[] data) {
+        this.name = name;
+        this.type = type;
+        this.size = size;
+        this.data = data;
+    }
 }

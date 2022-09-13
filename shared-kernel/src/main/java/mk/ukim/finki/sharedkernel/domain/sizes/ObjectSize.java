@@ -32,6 +32,10 @@ public class ObjectSize implements ValueObject {
         return new ObjectSize(size - objectSize.size);
     }
 
+    public double transformInMB() {
+        return size/1000000.0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

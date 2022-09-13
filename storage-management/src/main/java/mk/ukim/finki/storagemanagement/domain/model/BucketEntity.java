@@ -4,9 +4,9 @@ import lombok.Getter;
 import mk.ukim.finki.sharedkernel.domain.base.AbstractEntity;
 import mk.ukim.finki.sharedkernel.domain.sizes.ObjectSize;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "buckets")
@@ -17,4 +17,21 @@ public class BucketEntity extends AbstractEntity<BucketId> {
 
     @Embedded
     private ObjectSize size;
+
+    @OneToMany
+    private List<FileEntity> files;
+
+    public BucketEntity(String name) {
+        this.name = name;
+        this.size = new ObjectSize(0L);
+        this.files = new ArrayList<>();
+    }
+
+    public BucketEntity() {
+    }
+
+    public void addFileToBucket(FileEntity fileEntity) {
+        files.add(fileEntity);
+        size = size.add(fileEntity.getSize());
+    }
 }
