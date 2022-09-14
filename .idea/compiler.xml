@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="shared-kernel" />
+        <module name="company-management" />
         <module name="EMTCloud" />
         <module name="user-managment" />
         <module name="storage-management" />
@@ -16,6 +17,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="company-management" options="-parameters" />
       <module name="shared-kernel" options="-parameters" />
       <module name="storage-management" options="-parameters" />
       <module name="user-managment" options="-parameters" />

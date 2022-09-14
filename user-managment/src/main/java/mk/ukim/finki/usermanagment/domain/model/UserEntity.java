@@ -18,9 +18,6 @@ public class UserEntity extends AbstractEntity<UserId> {
     @Embedded
     private Address address;
 
-    @ManyToOne
-    private CompanyEntity userCompany;
-
     public UserEntity() {
         super(UserId.randomId(UserId.class));
     }

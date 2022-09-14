@@ -22,6 +22,10 @@ public class Address implements ValueObject {
     public Address() {
     }
 
+    public static Address valueOf(String city, String number, String street){
+        return new Address(city, number, street);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
