@@ -7,6 +7,7 @@ import mk.ukim.finki.storagemanagement.domain.model.BucketEntity;
 import mk.ukim.finki.storagemanagement.domain.model.BucketId;
 import mk.ukim.finki.storagemanagement.domain.model.FileEntity;
 import mk.ukim.finki.storagemanagement.domain.repository.BucketRepository;
+import mk.ukim.finki.storagemanagement.domain.valueobjects.UserId;
 import mk.ukim.finki.storagemanagement.service.BucketService;
 import mk.ukim.finki.storagemanagement.service.form.BucketForm;
 import mk.ukim.finki.storagemanagement.service.form.FileResponse;
@@ -59,7 +60,7 @@ public class BucketServiceImpl implements BucketService {
 
     @Override
     public BucketEntity createBucket(BucketForm bucketForm) {
-        BucketEntity bucketEntity = new BucketEntity(bucketForm.getName());
+        BucketEntity bucketEntity = new BucketEntity(bucketForm.getUserId(), bucketForm.getName());
         this.bucketRepository.save(bucketEntity);
         return bucketEntity;
     }

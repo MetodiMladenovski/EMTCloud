@@ -1,4 +1,4 @@
-package mk.finki.ukim.companymanagement.domain.valueobjects;
+package mk.ukim.finki.storagemanagement.domain.valueobjects;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
