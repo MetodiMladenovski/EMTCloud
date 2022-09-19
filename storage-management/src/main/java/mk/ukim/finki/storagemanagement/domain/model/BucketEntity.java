@@ -21,7 +21,7 @@ public class BucketEntity extends AbstractEntity<BucketId> {
     @Embedded
     private ObjectSize size;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<FileEntity> files;
 
     @Embedded

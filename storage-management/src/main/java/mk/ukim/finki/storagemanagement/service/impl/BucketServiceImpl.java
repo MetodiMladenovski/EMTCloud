@@ -46,8 +46,8 @@ public class BucketServiceImpl implements BucketService {
         return bucketEntity.getFiles().stream().map(fileEntity -> {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
-                    .path("/files/")
-                    .path(fileEntity.getId().toString())
+                    .path("/api/buckets/download/")
+                    .path(fileEntity.getId().getId())
                     .toUriString();
 
             return new FileResponse(
