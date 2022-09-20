@@ -1,19 +1,17 @@
-package mk.ukim.finki.storagemanagement.domain.model;
+package mk.ukim.finki.usermanagment.domain.valueobjects;
 
 import lombok.NonNull;
 import mk.ukim.finki.sharedkernel.domain.base.DomainObjectId;
 
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class BucketId extends DomainObjectId {
-    private BucketId() {
+    protected BucketId() {
         super(BucketId.randomId(BucketId.class).getId());
     }
 
     public BucketId(@NonNull String uuid) {
         super(uuid);
-    }
-
-    public static BucketId of(String uuid) {
-        BucketId b = new BucketId(uuid);
-        return b;
     }
 }

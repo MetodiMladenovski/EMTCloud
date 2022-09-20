@@ -1,4 +1,4 @@
-package mk.ukim.finki.storagemanagement.domain.model;
+package mk.ukim.finki.usermanagment.domain.model;
 
 import lombok.NonNull;
 import mk.ukim.finki.sharedkernel.domain.base.DomainObjectId;

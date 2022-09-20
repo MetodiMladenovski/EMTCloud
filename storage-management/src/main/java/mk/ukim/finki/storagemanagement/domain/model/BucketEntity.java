@@ -8,8 +8,6 @@ import mk.ukim.finki.sharedkernel.domain.sizes.ObjectSize;
 import mk.ukim.finki.storagemanagement.domain.valueobjects.UserId;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "buckets")
@@ -21,26 +19,30 @@ public class BucketEntity extends AbstractEntity<BucketId> {
     @Embedded
     private ObjectSize size;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<FileEntity> files;
-
     @Embedded
     @AttributeOverride(name = "id", column = @Column(name = "user_id", nullable = false))
     private UserId userId;
+
+    private Integer numberOfFilesInBucket;
 
     public BucketEntity(@NonNull UserId userId, String name) {
         super(DomainObjectId.randomId(BucketId.class));
         this.userId = userId;
         this.name = name;
         this.size = new ObjectSize(0L);
-        this.files = new ArrayList<>();
+        this.numberOfFilesInBucket = 0;
     }
 
     public BucketEntity() {
     }
 
-    public void addFileToBucket(FileEntity fileEntity) {
-        files.add(fileEntity);
-        size = size.add(fileEntity.getSize());
+    public void increaseSizeAndNumber(long fileSize) {
+        size = size.add(new ObjectSize(fileSize));
+        ++numberOfFilesInBucket;
+    }
+
+    public void decreaseSizeAndNumber(long fileSize) {
+        size = size.subtract(new ObjectSize(fileSize));
+        --numberOfFilesInBucket;
     }
 }

@@ -1,14 +1,12 @@
-package mk.ukim.finki.storagemanagement.domain.model;
+package mk.ukim.finki.usermanagment.domain.model;
 
 import lombok.Getter;
 import mk.ukim.finki.sharedkernel.domain.base.AbstractEntity;
 import mk.ukim.finki.sharedkernel.domain.base.DomainObjectId;
 import mk.ukim.finki.sharedkernel.domain.sizes.ObjectSize;
+import mk.ukim.finki.usermanagment.domain.valueobjects.BucketId;
 
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "files")
@@ -26,14 +24,19 @@ public class FileEntity extends AbstractEntity<FileId> {
     @Lob
     private byte[] data;
 
+    @Embedded
+    @AttributeOverride(name = "id", column = @Column(name = "bucket_id", nullable = false))
+    private BucketId bucketId;
+
     public FileEntity() {
     }
 
-    public FileEntity(String name, String type, ObjectSize size, byte[] data) {
+    public FileEntity(String name, String type, ObjectSize size, byte[] data, BucketId bucketId) {
         super(DomainObjectId.randomId(FileId.class));
         this.name = name;
         this.type = type;
         this.size = size;
         this.data = data;
+        this.bucketId = bucketId;
     }
 }
