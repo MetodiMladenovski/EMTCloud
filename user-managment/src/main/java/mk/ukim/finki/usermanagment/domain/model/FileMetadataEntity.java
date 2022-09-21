@@ -9,9 +9,9 @@ import mk.ukim.finki.usermanagment.domain.valueobjects.BucketId;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "files")
+@Table(name = "files_metadata")
 @Getter
-public class FileEntity extends AbstractEntity<FileId> {
+public class FileMetadataEntity extends AbstractEntity<FileMetadataId> {
 
     private String name;
 
@@ -20,23 +20,23 @@ public class FileEntity extends AbstractEntity<FileId> {
     @Embedded
     private ObjectSize size;
 
-    //mongoDB ID
-    @Lob
-    private byte[] data;
+    @Embedded
+    @AttributeOverride(name = "id", column = @Column(name = "content_id", nullable = false))
+    private FileContentId contentId;
 
     @Embedded
     @AttributeOverride(name = "id", column = @Column(name = "bucket_id", nullable = false))
     private BucketId bucketId;
 
-    public FileEntity() {
+    public FileMetadataEntity() {
     }
 
-    public FileEntity(String name, String type, ObjectSize size, byte[] data, BucketId bucketId) {
-        super(DomainObjectId.randomId(FileId.class));
+    public FileMetadataEntity(String name, String type, ObjectSize size, FileContentId contentId, BucketId bucketId) {
+        super(DomainObjectId.randomId(FileMetadataId.class));
         this.name = name;
         this.type = type;
         this.size = size;
-        this.data = data;
+        this.contentId = contentId;
         this.bucketId = bucketId;
     }
 }

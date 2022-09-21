@@ -22,9 +22,4 @@ public class BucketResource {
         return bucketService.getAll();
     }
 
-    @PostMapping
-    public ResponseEntity<BucketEntity> createBucket(@Valid @RequestBody BucketForm bucketForm){
-        return ResponseEntity.ok(bucketService.createBucket(bucketForm));
-    }
-
 }

@@ -1,18 +1,21 @@
 package mk.ukim.finki.usermanagment.service.form;
 
 import lombok.Data;
+import mk.ukim.finki.usermanagment.domain.model.FileMetadataId;
 
 @Data
 public class FileResponse {
+    private FileMetadataId id;
     private String name;
     private String url;
     private String type;
-    private long size;
+    private String fileContentId;
 
-    public FileResponse(String name, String url, String type, long size) {
+    public FileResponse(FileMetadataId id, String name, String url, String type, String fileContentId) {
+        this.id = id;
         this.name = name;
         this.url = url;
         this.type = type;
-        this.size = size;
+        this.fileContentId = fileContentId;
     }
 }

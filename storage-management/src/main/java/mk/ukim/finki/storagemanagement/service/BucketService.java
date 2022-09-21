@@ -3,7 +3,6 @@ package mk.ukim.finki.storagemanagement.service;
 import mk.ukim.finki.storagemanagement.domain.model.BucketEntity;
 import mk.ukim.finki.storagemanagement.domain.model.BucketId;
 import mk.ukim.finki.storagemanagement.service.form.BucketForm;
-import mk.ukim.finki.storagemanagement.service.form.FileResponse;
 
 import java.util.List;
 
@@ -16,5 +15,5 @@ public interface BucketService {
     void increaseSizeAndNumber(String bucketId, long fileSize);
     void decreaseSizeAndNumber(String bucketId, long fileSize);
 
-    //void deleteBucket(BucketId bucketId);
+    void deleteBucket(BucketId bucketId);
 }

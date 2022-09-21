@@ -1,6 +1,8 @@
-package mk.ukim.finki.usermanagment.xport;
+package mk.ukim.finki.usermanagment.xport.rest;
 
 import lombok.AllArgsConstructor;
+import mk.ukim.finki.sharedkernel.domain.events.company.AddEmployeeEvent;
+import mk.ukim.finki.sharedkernel.infra.DomainEventPublisher;
 import mk.ukim.finki.usermanagment.domain.model.UserEntity;
 import mk.ukim.finki.usermanagment.domain.model.UserId;
 import mk.ukim.finki.usermanagment.service.UserService;
@@ -23,9 +25,8 @@ public class UserResource {
     public ResponseEntity<UserResponse> registerUser(
             @Valid @RequestBody UserRegisterRequest userRegisterRequest) {
 
-        ResponseEntity<UserResponse> responseEntity =
-                new ResponseEntity<>(userService.registerUser(userRegisterRequest), HttpStatus.OK);
-        return responseEntity;
+        UserResponse userResponse = userService.registerUser(userRegisterRequest);
+        return new ResponseEntity<>(userResponse, HttpStatus.OK);
     }
 
     @GetMapping("/users")

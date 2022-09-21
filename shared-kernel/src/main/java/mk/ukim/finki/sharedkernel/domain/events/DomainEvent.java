@@ -4,9 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-
 @Getter
 public class DomainEvent {
 

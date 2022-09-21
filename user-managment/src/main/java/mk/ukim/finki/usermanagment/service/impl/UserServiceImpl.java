@@ -1,7 +1,9 @@
 package mk.ukim.finki.usermanagment.service.impl;
 
 import lombok.AllArgsConstructor;
+import mk.ukim.finki.sharedkernel.domain.events.company.AddEmployeeEvent;
 import mk.ukim.finki.sharedkernel.domain.information.Address;
+import mk.ukim.finki.sharedkernel.infra.DomainEventPublisher;
 import mk.ukim.finki.usermanagment.domain.exceptions.EmailAlreadyInUseException;
 import mk.ukim.finki.usermanagment.domain.exceptions.UserNotFoundException;
 import mk.ukim.finki.usermanagment.domain.model.Role;
@@ -21,6 +23,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final DomainEventPublisher eventPublisher;
 
     @Override
     public UserEntity findById(UserId userId) {
@@ -35,7 +38,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse registerUser(UserRegisterRequest userRegisterRequest) {
 
-        //TODO: CompanyID
         if (userRepository.existsByEmail(userRegisterRequest.getEmail())) {
             throw new EmailAlreadyInUseException();
         }
@@ -43,12 +45,14 @@ public class UserServiceImpl implements UserService {
                 userRegisterRequest.getNumberAddress(),
                 userRegisterRequest.getStreetAddress());
 
-        UserEntity userEntity = new UserEntity(CompanyId.randomId(CompanyId.class),
+        UserEntity userEntity = new UserEntity(CompanyId.of(userRegisterRequest.getCompanyId()),
                 userRegisterRequest.getFullName(), userRegisterRequest.getEmail(),
                 passwordEncoder.encode(userRegisterRequest.getPassword()),
                 address, Role.ROLE_USER);
 
         userRepository.save(userEntity);
+        eventPublisher.publish(new AddEmployeeEvent("", userEntity.getCompanyId().getId()));
+
 
         return new UserResponse(userEntity.getId(),
                 userEntity.getEmail(),

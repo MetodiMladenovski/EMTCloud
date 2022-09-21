@@ -11,4 +11,8 @@ public class CompanyId extends DomainObjectId {
     public CompanyId(@NonNull String uuid) {
         super(uuid);
     }
+
+    public static CompanyId of(String uuid) {
+        return new CompanyId(uuid);
+    }
 }

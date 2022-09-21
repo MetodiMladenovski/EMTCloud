@@ -9,7 +9,6 @@ import mk.ukim.finki.usermanagment.domain.valueobjects.CompanyId;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRegisterRequest {
-    //TODO:CompanyID
     private String fullName;
     private String email;
     private String password;
@@ -17,4 +16,5 @@ public class UserRegisterRequest {
     private String cityAddress;
     private String numberAddress;
     private String streetAddress;
+    private String companyId;
 }

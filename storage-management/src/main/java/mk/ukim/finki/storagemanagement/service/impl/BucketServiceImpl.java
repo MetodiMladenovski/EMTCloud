@@ -8,12 +8,9 @@ import mk.ukim.finki.storagemanagement.domain.model.BucketId;
 import mk.ukim.finki.storagemanagement.domain.repository.BucketRepository;
 import mk.ukim.finki.storagemanagement.service.BucketService;
 import mk.ukim.finki.storagemanagement.service.form.BucketForm;
-import mk.ukim.finki.storagemanagement.service.form.FileResponse;
 import org.springframework.stereotype.Service;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -70,12 +67,12 @@ public class BucketServiceImpl implements BucketService {
         bucketEntity.decreaseSizeAndNumber(fileSize);
         bucketRepository.save(bucketEntity);
     }
-//    @Override
-//    public void deleteBucket(BucketId bucketId) {
-//        BucketEntity bucketEntity = this.bucketRepository.findById(bucketId).orElseThrow(BucketNotFoundException::new);
-//        if(bucketEntity.getFiles().size() != 0){
-//            throw new BucketNotEmptyException();
-//        }
-//        this.bucketRepository.delete(bucketEntity);
-//    }
+    @Override
+    public void deleteBucket(BucketId bucketId) {
+        BucketEntity bucketEntity = this.bucketRepository.findById(bucketId).orElseThrow(BucketNotFoundException::new);
+        if(bucketEntity.getNumberOfFilesInBucket() != 0){
+            throw new BucketNotEmptyException();
+        }
+        this.bucketRepository.delete(bucketEntity);
+    }
 }
