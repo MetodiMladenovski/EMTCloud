@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/company")
+@RequestMapping("/public/api/company")
 @AllArgsConstructor
 public class CompanyResource {
     private final CompanyClient companyClient;
